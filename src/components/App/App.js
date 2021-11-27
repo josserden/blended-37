@@ -2,6 +2,8 @@ import "./App.styled.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { v4 as uuidv4 } from "uuid";
+import Advantage from "../Advantage/Advantage";
+import sectionOne from "../../data/section-1.json";
 
 import { Section, SectionTitle, Container, Button } from "./App.styled";
 
@@ -29,7 +31,11 @@ function App() {
           </Button>
         </Container>
       </Section>
-
+      <Section>
+        <Container>
+          <Advantage array={sectionOne} />
+        </Container>
+      </Section>
       <ToastContainer
         position="top-right"
         autoClose={5000}

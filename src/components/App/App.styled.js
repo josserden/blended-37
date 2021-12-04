@@ -31,22 +31,3 @@ export const Container = styled.div`
 
   text-align: center;
 `;
-
-export const Button = styled.button`
-  padding: 10px 32px;
-
-  background-color: #2196f3;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-  border-radius: 4px;
-
-  font-weight: bold;
-  font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: 0.06em;
-
-  color: #ffffff;
-
-  &:hover {
-    background-color: #188ce8;
-  }
-`;

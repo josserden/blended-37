@@ -12,8 +12,8 @@ export function onSuccess(text) {
     progress: undefined,
   });
 }
-export function onError() {
-  toast.error(" Error!", {
+export function onError(text) {
+  toast.error(`${text}`, {
     position: "top-center",
     autoClose: 5000,
     hideProgressBar: false,

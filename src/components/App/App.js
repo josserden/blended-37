@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import React, { Component } from 'react'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from 'uuid'
 
-import "./App.styled.js";
+import './App.styled.js'
 import {
   Section,
   SectionTitle,
@@ -14,17 +14,50 @@ import {
   LabelText,
   Container,
   Button,
-} from "./App.styled";
-import { onSuccess, onError } from "../Notification/Notification";
+} from './App.styled'
+import { onSuccess, onError } from '../Notification/Notification'
 
-import { BsFillTelephoneForwardFill } from "react-icons/bs";
-import { MdDriveFileRenameOutline } from "react-icons/md";
+import { BsFillTelephoneForwardFill } from 'react-icons/bs'
+import { MdDriveFileRenameOutline } from 'react-icons/md'
 
-const initialState = {};
+const initialState = {}
 
-const nameIdInput = uuidv4();
-const numberIdInput = uuidv4();
+const nameIdInput = uuidv4()
+const numberIdInput = uuidv4()
 export default class App extends Component {
+  state = {
+    contacts: [],
+  }
+  addContact = (name, number) => {
+    const newContact = {
+      id: uuidv4(),
+      name,
+      number,
+    }
+
+    this.setState(({ contacts }) => ({
+      contacts: [...contacts, newContact],
+    }))
+  }
+  onChange = (event) => {
+    this.setState({
+      [event.currentTarget.name]: event.currentTarget.value,
+    })
+  }
+
+  reset = () => {
+    this.setState({
+      name: '',
+      number: '',
+    })
+  }
+  onSubmit = (e) => {
+    e.preventDefault()
+
+    this.addContact(this.state.name, this.state.number)
+    console.log(this.state)
+    this.reset()
+  }
   render() {
     return (
       <>
@@ -32,7 +65,7 @@ export default class App extends Component {
           <SectionTitle>Contact Form</SectionTitle>
 
           <Container>
-            <Form>
+            <Form onSubmit={this.onSubmit}>
               <Label htmlFor={nameIdInput}>
                 <LabelText>
                   <MdDriveFileRenameOutline />
@@ -42,6 +75,8 @@ export default class App extends Component {
                   id={nameIdInput}
                   type="text"
                   name="name"
+                  value={this.state.name}
+                  onChange={this.onChange}
                   placeholder="Enter your name"
                   pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                   title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
@@ -57,6 +92,8 @@ export default class App extends Component {
                   id={numberIdInput}
                   type="tel"
                   name="number"
+                  value={this.state.number}
+                  onChange={this.onChange}
                   placeholder="Enter your tel number"
                   pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                   title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
@@ -71,6 +108,6 @@ export default class App extends Component {
 
         <ToastContainer />
       </>
-    );
+    )
   }
 }

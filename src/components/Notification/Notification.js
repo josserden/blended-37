@@ -1,8 +1,8 @@
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export function onSuccess() {
-  toast.success("🦄 Wow so easy!", {
+export function onSuccess(text) {
+  toast.success(`${text}`, {
     position: "top-center",
     autoClose: 5000,
     hideProgressBar: false,

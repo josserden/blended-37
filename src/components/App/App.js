@@ -1,10 +1,8 @@
-import React, { Component } from 'react'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import React, { Component } from "react";
+import { ToastContainer } from "react-toastify";
+import { v4 as uuidv4 } from "uuid";
 
-import { v4 as uuidv4 } from 'uuid'
-
-import './App.styled.js'
+import "./App.styled.js";
 import {
   Section,
   SectionTitle,
@@ -14,50 +12,55 @@ import {
   LabelText,
   Container,
   Button,
-} from './App.styled'
-import { onSuccess, onError } from '../Notification/Notification'
+} from "./App.styled";
+import { onSuccess, onError } from "../Notification/Notification";
+import { nameIdInput, numberIdInput } from "../../helpers/helpers";
 
-import { BsFillTelephoneForwardFill } from 'react-icons/bs'
-import { MdDriveFileRenameOutline } from 'react-icons/md'
+import { BsFillTelephoneForwardFill } from "react-icons/bs";
+import { MdDriveFileRenameOutline } from "react-icons/md";
 
-const initialState = {}
+const initialState = { contacts: [] };
 
-const nameIdInput = uuidv4()
-const numberIdInput = uuidv4()
 export default class App extends Component {
-  state = {
-    contacts: [],
-  }
+  state = initialState;
+
   addContact = (name, number) => {
     const newContact = {
       id: uuidv4(),
       name,
       number,
-    }
+    };
 
     this.setState(({ contacts }) => ({
       contacts: [...contacts, newContact],
-    }))
-  }
+    }));
+  };
+
   onChange = (event) => {
+    const { name, value } = event.currentTarget;
+
     this.setState({
-      [event.currentTarget.name]: event.currentTarget.value,
-    })
-  }
+      [name]: value,
+    });
+  };
 
   reset = () => {
     this.setState({
-      name: '',
-      number: '',
-    })
-  }
-  onSubmit = (e) => {
-    e.preventDefault()
+      name: "",
+      number: "",
+    });
+  };
 
-    this.addContact(this.state.name, this.state.number)
-    console.log(this.state)
-    this.reset()
-  }
+  onSubmit = (e) => {
+    e.preventDefault();
+
+    const { name, number } = this.state;
+    this.addContact(name, number);
+    onSuccess("Your add your contact!");
+
+    this.reset();
+  };
+
   render() {
     return (
       <>
@@ -108,6 +111,6 @@ export default class App extends Component {
 
         <ToastContainer />
       </>
-    )
+    );
   }
 }

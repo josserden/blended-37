@@ -1,16 +1,21 @@
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
-import EditIcon from '@mui/icons-material/Edit';
+import * as React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteProduct } from "redux/products/productsSlice";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import ArrowDropDownCircleIcon from "@mui/icons-material/ArrowDropDownCircle";
+import EditIcon from "@mui/icons-material/Edit";
 
 export default function BasicTable({ data }) {
+  const products = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+
   return (
     <TableContainer component={Paper} sx={{ marginTop: 6 }}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -27,10 +32,11 @@ export default function BasicTable({ data }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map(({ dessert, calories, fat, carbs, protein, id }) => (
+          {products.map(({ dessert, calories, fat, carbs, protein, id }) => (
             <TableRow
               key={id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
               <TableCell component="th" scope="row">
                 {dessert}
               </TableCell>
@@ -41,14 +47,12 @@ export default function BasicTable({ data }) {
               <TableCell>
                 <button
                   onClick={() => {
-                    console.log('Click');
-                  }}>
+                    console.log("Click");
+                  }}
+                >
                   <EditIcon />
                 </button>
-                <button
-                  onClick={() => {
-                    console.log('Click');
-                  }}>
+                <button onClick={() => dispatch(deleteProduct(id))}>
                   <DeleteOutlineIcon />
                 </button>
               </TableCell>

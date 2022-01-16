@@ -1,38 +1,38 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
-import useLocalStorage from "../../hooks/hooks";
+import useLocalStorage from 'hooks/hooks';
 
 export default function Form({ onSubmit }) {
-  const [dessert, setDessert] = useLocalStorage("dessert", "");
-  const [calories, setCalories] = useLocalStorage("calories", "");
-  const [fat, setFat] = useLocalStorage("fat", "");
-  const [carbs, setCarbs] = useLocalStorage("carbs", "");
-  const [protein, setProtein] = useLocalStorage("protein", "");
+  const [dessert, setDessert] = useLocalStorage('dessert', '');
+  const [calories, setCalories] = useLocalStorage('calories', '');
+  const [fat, setFat] = useLocalStorage('fat', '');
+  const [carbs, setCarbs] = useLocalStorage('carbs', '');
+  const [protein, setProtein] = useLocalStorage('protein', '');
 
   const inputChange = (event) => {
     const { name, value } = event.target;
 
     switch (name) {
-      case "dessert":
+      case 'dessert':
         setDessert(value);
         break;
 
-      case "calories":
+      case 'calories':
         setCalories(value);
         break;
 
-      case "fat":
+      case 'fat':
         setFat(value);
         break;
 
-      case "carbs":
+      case 'carbs':
         setCarbs(value);
         break;
 
-      case "protein":
+      case 'protein':
         setProtein(value);
         break;
 
@@ -43,17 +43,17 @@ export default function Form({ onSubmit }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("CLICK");
+    console.log('CLICK');
     onSubmit({ dessert, calories, fat, carbs, protein });
     reset();
   };
 
   const reset = () => {
-    setDessert("");
-    setCalories("");
-    setFat("");
-    setCarbs("");
-    setProtein("");
+    setDessert('');
+    setCalories('');
+    setFat('');
+    setCarbs('');
+    setProtein('');
   };
 
   return (
@@ -61,17 +61,15 @@ export default function Form({ onSubmit }) {
       onSubmit={handleSubmit}
       component="form"
       sx={{
-        "& .MuiTextField-root": { m: 1, width: "25ch" },
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
       }}
       noValidate
-      autoComplete="off"
-    >
+      autoComplete="off">
       <div>
         <TextField
           required
           id="outlined-required"
           label="Dessert"
-          defaultValue="Frozen yoghurt"
           type="text"
           name="dessert"
           value={dessert}
@@ -81,7 +79,6 @@ export default function Form({ onSubmit }) {
           required
           id="outlined-required"
           label="Calories"
-          defaultValue="159"
           type="number"
           name="calories"
           value={calories}
@@ -91,7 +88,6 @@ export default function Form({ onSubmit }) {
           required
           id="outlined-required"
           label="fat"
-          defaultValue="6"
           type="number"
           name="fat"
           value={fat}
@@ -101,7 +97,6 @@ export default function Form({ onSubmit }) {
           required
           id="outlined-required"
           label="Carbs"
-          defaultValue="24"
           type="number"
           name="carbs"
           value={carbs}
@@ -111,7 +106,6 @@ export default function Form({ onSubmit }) {
           required
           id="outlined-required"
           label="Protein"
-          defaultValue="4"
           type="number"
           name="protein"
           value={protein}

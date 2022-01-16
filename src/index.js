@@ -1,16 +1,19 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 
-import "modern-normalize/modern-normalize.css";
-import { Global } from "@emotion/react";
-import { GlobalStyles } from "./index.styled";
+import 'modern-normalize/modern-normalize.css';
+import { Global } from '@emotion/react';
+import { GlobalStyles } from './index.styled';
 
-import App from "./components/App";
+import App from './components/App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Global styles={GlobalStyles} />
-    <App />
+    <BrowserRouter>
+      <Global styles={GlobalStyles} />
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
